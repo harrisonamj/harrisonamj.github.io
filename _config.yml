@@ -2,6 +2,8 @@
 # This file contains configuration flags to customize your site
 #
 
+theme: jekyll-theme-midnight
+
 # Name of your site (displayed in the header)
 name: Adam Harrison
 
@@ -84,5 +86,3 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
-
-theme: jekyll-theme-midnight
