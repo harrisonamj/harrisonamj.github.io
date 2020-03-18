@@ -35,13 +35,9 @@ Connecting to the badge can be achieved in a number of ways but the first requir
 
 ### In Windows:
 Within device manager, after connecting the device via USB we can review what ports are in use:
-
 <p align="center">
   <img src="https://www.1234n6.com/content/images/2020/03/dev.png">
 </p>
-
-![Device Manager](https://www.1234n6.com/content/images/2020/03/dev.png)
-
 In this case COM5.
 
 ### In Linux:
