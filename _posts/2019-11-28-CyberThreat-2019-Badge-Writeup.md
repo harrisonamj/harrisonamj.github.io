@@ -81,6 +81,8 @@ Firstly we can see "Adam H harrisonamj" as well as some other sub-strings of the
 
 We also see references to 'BKRGB', 'NAMES', 'CHALL', 'KEY' and 'FLAG'... and we all like flags. What we have between offset 80h and B0h is a "page directory esque structure"...
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Challenge 2 - What if the memory is a page directory esque structure, and what if the ascii of the hex shows you the values you want... <a href="https://twitter.com/hashtag/hackablebadge?src=hash&amp;ref_src=twsrc%5Etfw">#hackablebadge</a> <a href="https://twitter.com/hashtag/tip?src=hash&amp;ref_src=twsrc%5Etfw">#tip</a> <a href="https://twitter.com/hashtag/CyberThreat19?src=hash&amp;ref_src=twsrc%5Etfw">#CyberThreat19</a> <a href="https://t.co/3oaKt7Ln1g">pic.twitter.com/3oaKt7Ln1g</a></p>&mdash; SANS Institute, EMEA (@SANSEMEA) <a href="https://twitter.com/SANSEMEA/status/1198970619817271296?ref_src=twsrc%5Etfw">November 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 Based upon the need for this question to ultimately be explained to the conference, and the hints posted to social media, I think it is safe to assume this leap was not made by everyone (myself included). What I do know, is that Bastien Lardy ([@BastienLardy](https://twitter.com/bastienlardy)) managed to figure it out and crack this challenge well before the big reveal, and I know this because he had to help me realise the mistake I was making...
 
 Putting that aside if we interpret the values beside our interesting references we get the following:
