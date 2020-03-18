@@ -11,6 +11,9 @@ The badges formed the bases of a CTF, which was one of the highlights of the eve
 
 For those interested, a video walkthrough from James Lyne ([@jameslyne](https://twitter.com/jameslyne)) and Simon McNameee ([@mcnamee_simon](https://twitter.com/mcnamee_simon)), that details the various stages, is available below:
 
+<iframe src="https://player.vimeo.com/video/263963689?color=21f9fe&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/263963689">CyberThreat 2018 - Badge Walkthrough</a> from <a href="https://vimeo.com/ethicallyevil">Helical Levity</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
 Unsurprisingly having secured a place at CyberThreat 2019 and having seen various comments suggesting that the badges were going to be bigger and better than last year, I was excited to have a play.
 
 This year, rather than being a mere two hours late, it was a full two days after the conference had closed before I was able to complete the final challenge. I don't think I will have been the first, but nevertheless it was good fun.
