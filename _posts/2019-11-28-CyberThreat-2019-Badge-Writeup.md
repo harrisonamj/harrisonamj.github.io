@@ -38,17 +38,18 @@ Connecting to the badge can be achieved in a number of ways but the first requir
 
 ### In Windows:
 Within device manager, after connecting the device via USB we can review what ports are in use:
+
 <p align="center">
   <img src="https://www.1234n6.com/content/images/2020/03/dev.png">
 </p>
-In this case COM5.
 
+In this case COM5.
 ### In Linux:
 
 There are a number of ways to confirm this but I generally grep dmesg for 'tty' after connecting the device.
-
-`dmesg | grep tty`
-
+```
+dmesg | grep tty
+```
 Once we know the COM port in use we can use Putty, Arduino IDE, screen, python serial or a myriad of other methods to communicate with the badge. I found Arduino IDE with 9600 baud to be reliable for interactive needs, screen via WSL was also helpful and for later challenges pySerial was needed.
 ## Level 1 - Maze Madness
 The first level 'Maze Madness' presents you with a current location, goal location, a score and the simple instruction "Press 'A' to move!".
@@ -69,7 +70,9 @@ Level 2 presented the player with a scrollable wall of hex, which in the case of
 
 Notably we also see communication over the serial interface we are monitoring with a simple request to enter a password.
 
-![screen](https://www.1234n6.com/content/images/2020/03/screen.png)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/screen.png">
+</p>
 
 After I had recovered from the 'SEC503 flashback' that being presented with a surprise wall of hex tends to induce, I began the process of transcribing the values so I could work on determining what they represented. Incidentally, if you are a CTF author and you are considering having participants transcribe 384 characters... don't.
 
@@ -86,9 +89,6 @@ We also see references to 'BKRGB', 'NAMES', 'CHALL', 'KEY' and 'FLAG'... and we 
 Based upon the need for this question to ultimately be explained to the conference, and the hints posted to social media, I think it is safe to assume this leap was not made by everyone (myself included). What I do know, is that Bastien Lardy ([@BastienLardy](https://twitter.com/bastienlardy)) managed to figure it out and crack this challenge well before the big reveal, and I know this because he had to help me realise the mistake I was making...
 
 Putting that aside if we interpret the values beside our interesting references we get the following:
-
-![table](https://www.1234n6.com/content/images/2020/03/table.PNG)
-
 
 |  | Offset | Size |
 | :---: |:---:| :---:|
@@ -114,13 +114,17 @@ One good indication that the values you selected were correct will be that the r
 ## Level 3 - Warped Wordlist
 I earlier mentioned that I had imaged the SD card and had a poke around, the first thing which jumped out at me was 'wordlist.txt' at the root of the storage device. NB. no image is required you can directly access this but it never does any harm to have a full backup of the storage device.
 
-![Files](https://www.1234n6.com/content/images/2020/03/files.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/files.PNG">
+</p>
 
 A quick examination of the file identified that it contained a list of 50 words. Further, when I compared this wordlist with others, it appears we all had the same list.
 
 Now on with the challenge... The screen on the device simply stated 'Password Required!' making the next step to review how the device presented over serial and see if that provided any clues:
 
-![Arduino IDE](https://www.1234n6.com/content/images/2020/03/com22.png)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/com22.png">
+</p>
 
 Well I guess we better try those passwords... so type each one individually...
 
@@ -158,7 +162,9 @@ I proceeded to patiently repeat this exercise and noted down each unique words I
 
 I performed a number of simple tests, which included comparing the character count between the two word lists:
 
-![Character Count](https://www.1234n6.com/content/images/2020/03/char.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/char.PNG">
+</p>
 
 This made it clear that there was not a simple character substitution going on. But undeterred I analysed the word lengths in my two lists:
 ```
@@ -187,7 +193,9 @@ etc...
 
 Next I loaded the two lists into excel side by side and using the unique letter counts within each letter set, I started pairing them up, which looked roughly like this:
 
-![Matches](https://www.1234n6.com/content/images/2020/03/match.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/match.PNG">
+</p>
 
 There is undoubtedly a more scientific approach which would allow for the full listing to be paired up, but for the purposes of completing the game, only one match was needed so the approx 50% I had completed was more than enough.
 
@@ -213,7 +221,9 @@ I am sure there is a jolly clever way to do this on the command line, but I open
 
 Once I had saved this out (in my case named 'bin') I had an ELF which I could execute. So I did:
 
-![No such luck](https://www.1234n6.com/content/images/2020/03/no.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/no.PNG">
+</p>
 
 Obviously it wasn't going to be that easy. So I undertook my traditional 3 stage reverse engineering process:
 1. Use strings
@@ -222,47 +232,57 @@ Obviously it wasn't going to be that easy. So I undertook my traditional 3 stage
 
 Strings wasn't giving up any clues:
 
-![Strings output](https://www.1234n6.com/content/images/2020/03/strings.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/strings.PNG">
+</p>
+
 IDA had the expected result:
 
-![IDA](https://www.1234n6.com/content/images/2020/03/IDA.PNG)
+
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/IDA.PNG">
+</p>
 
 So did BinaryNinja:
-
 ![BinaryNinja](https://www.1234n6.com/content/images/2020/03/binaryninja.png)
 
-Why do I even bother looking
 But the real kicker was when my go to backup option went as follows:
-
-![CH](https://www.1234n6.com/content/images/2020/03/CH.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/CH.PNG">
+</p>
 
 Reverse Engineering is very far from my strong point, and as such a lot of guess work occurred. I persisted down all conceivable rabbit hole until I settled on the fact that I would have to work with this binary somehow. I ran the executable within gdb and determined that despite no effort to learn since I last tried to use gdb I still have no clue what I am doing.
 
 A quick strace to see what was happening before the error resulted in the following:
-
-![strace output](https://www.1234n6.com/content/images/2020/03/Screenshot-from-2019-11-29-10-49-13.png)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/Screenshot-from-2019-11-29-10-49-13.png">
+</p>
 
 What we see in the first line before the error is printed is the use of 'getcwd' to fetch the current working directory. I'm not going to lie, this may he the case in every program but it got me thinking that the executable may want to be run from a certain location.
 
 Looking back in the hex of the file we can see what looks like a file path, towards the end of the file. This was missed when we ran strings earlier due it the encoding.
-
-![hex](https://www.1234n6.com/content/images/2020/03/hex.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/hex.PNG">
+</p>
 
 If we run strings again we can pick out the unicode string by adding '-e l':
-
-![strings again](https://www.1234n6.com/content/images/2020/03/strings2.PNG)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/strings2.PNG">
+</p>
 
 So we create the requested directory structure, move the executable 'bin' into it and run it from there using the below commands:
 ```
 mkdir /tmp/quarkmkdir /tmp/quark/fileexistsmv bin /tmp/quark/fileexists/cd /tmp/quark/fileexists/./bin
 ```
 We note that we do not get an error, and if we 'ls' the current directory we have a new file:
-
-![New file](https://www.1234n6.com/content/images/2020/03/Screenshot-from-2019-11-29-11-08-34.png)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/Screenshot-from-2019-11-29-11-08-34.png">
+</p>
 
 Ultimately this is an empty file. But all that matters is the filename. I proceeded to copy the file, preserving it's metadata into multiple locations on the SD card in an effort to see if it's presence would cause a win state in the game. However, subsequent testing shows it is as easy as using the file manager tool within the badge to create a file of that name...
-
-![Win](https://www.1234n6.com/content/images/2020/03/Win.png)
+<p align="center">
+  <img src="https://www.1234n6.com/content/images/2020/03/Win.png">
+</p>
 
 And...
 
